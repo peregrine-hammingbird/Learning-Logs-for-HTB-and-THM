@@ -1,0 +1,100 @@
+🛡️ Python Penetration Testing Toolkit Collection
+📝 概要 (Overview)
+このリポジトリは、TryHackMeの「Python for Pentesters」ルームで実践的に開発された、一連のペネトレーションテスト用Pythonスクリプト集です。
+情報収集、ネットワークスキャン、認証攻撃、ポストエクスプロイトなど、様々なフェーズに対応するツールが含まれています。
+
+すべてのスクリプトは、セキュリティテストの自動化とPythonスキル向上を目的としています。
+
+⚙️ 環境構築 (Setup)
+1. 動作環境
+OS: Kali Linux, Parrot Security OS, またはその他のLinux環境 (Windows/macOSでも実行可能ですが、一部のネットワーク機能には制限があります)
+
+Python: Python 3.x
+
+2. 依存関係のインストール
+各スクリプトは、以下の主要なPythonライブラリに依存しています。
+
+Bash
+
+# スクリプト全体で必要な依存関係をインストール
+pip3 install requests scapy paramiko pynput hashlib
+注意: scapyを使用するスクリプト（例: network_scanner.py）は、生のソケットアクセスが必要なため、通常はsudo（管理者権限）で実行する必要があります。
+
+🚀 ツール詳細と実行方法 (Tool Details and Usage)
+作成された各スクリプトについて、機能、使用ライブラリ、および具体的な実行方法を以下に示します。
+
+1. サブドメイン列挙 (subdomain_enum.py)
+カテゴリ: 情報収集
+使用ライブラリ: requests, sys
+機能: ワードリストを使用して、ターゲットドメインのサブドメインを辞書攻撃で試行し、有効なものを特定します。
+実行例:Bash
+python3 subdomain_enum.py <TARGET_DOMAIN> <WORDLIST_FILE>
+# 例: python3 subdomain_enum.py example.com subdomains.txt
+
+2. ディレクトリ列挙 (dir_enum.py)
+カテゴリ: 情報収集
+使用ライブラリ: requests, sys
+機能: Webサーバーに対して大量のリクエストを送信し、隠されたディレクトリやファイルを探索します（通常、HTTPステータスコード200または301/302を確認）。
+実行例：Bash
+python3 dir_enum.py <TARGET_URL> <WORDLIST_FILE>
+# 例: python3 dir_enum.py http://target.com /usr/share/wordlists/dirb/common.txt
+
+3. ネットワークスキャナー (network_scanner.py)
+カテゴリ: ネットワーク
+使用ライブラリ: scapy
+機能: ARPパケットをブロードキャストし、ローカルネットワーク上のアクティブなホストのIPアドレスとMACアドレスを特定します。
+実行例:Bash
+# 管理者権限が必要
+sudo python3 network_scanner.py <INTERFACE>
+# 例: sudo python3 network_scanner.py eth0
+
+4. ポートスキャナー (port_scanner.py)
+カテゴリ: ネットワーク
+使用ライブラリ: socket, sys
+機能: ターゲットホストの指定されたポート範囲に対してTCPコネクションを試行し、開いているポートを特定します。スレッド化により高速化されています。
+実行例:Bash
+python3 port_scanner.py <TARGET_IP> <START_PORT> <END_PORT>
+# 例: python3 port_scanner.py 192.168.1.1 1 1000
+
+5. ファイルダウンローダー (file_downloader.py)
+カテゴリ: ユーティリティ
+使用ライブラリ: requests
+機能: 指定されたURLからファイルをダウンロードし、ローカルに指定した名前で保存します。
+実行例:Bash
+python3 file_downloader.py <SOURCE_URL> <OUTPUT_FILENAME>
+# 例: python3 file_downloader.py http://target.com/exploit.exe payload.exe
+
+6. ハッシュクラッカー (hash_cracker.py)
+カテゴリ: パスワード攻撃
+使用ライブラリ: hashlib, sys
+機能: ワードリストを使用して、既知のハッシュ値（MD5, SHA256など）に対して辞書攻撃を行い、元のパスワードを特定します。
+実行例:Bash
+python3 hash_cracker.py <HASH_VALUE> <WORDLIST_FILE>
+# 例: python3 hash_cracker.py a5b4c3d2e1f0 passwords.txt
+
+7. キーロガー (keylogger.py)
+カテゴリ: ポストエクスプロイト
+使用ライブラリ: pynput
+機能: ターゲットシステム上でキーボード入力をフックし、記録します。セキュリティ監査や教育目的で使用されます。
+実行例:Bash
+python3 keylogger.py
+
+8. SSHブルートフォース (ssh_bruteforce.py)
+カテゴリ: 認証攻撃
+使用ライブラリ: paramiko, sys
+機能: paramikoライブラリを使用してSSHクライアントをエミュレートし、ワードリストに基づいたユーザー名とパスワードの組み合わせを試行します。
+実行例:Bash
+python3 ssh_bruteforce.py <TARGET_IP> <USER_LIST_FILE> <PASS_LIST_FILE>
+# 例: python3 ssh_bruteforce.py 10.10.10.10 users.txt passwords.txt
+
+💡 学習と技術的なハイライト (Learning & Technical Highlights)
+この一連のプロジェクトを通じて、以下の重要なセキュリティプログラミングの概念を実践しました。
+低レベルネットワーク: scapyとsocketによるレイヤー2/3/4でのパケット構築と通信制御。
+認証プロトコル: paramikoを使用したSSHクライアントの実装と認証メカニズムの操作。
+効率的な処理: スレッド処理の実装によるスキャンスピードの最適化。
+データ構造とロジック: ワードリストの読み込み、HTTPステータスコードの解釈、ハッシュ比較などのペンテストロジックの実装。
+
+📜 免責事項 (Disclaimer)
+このコードは、倫理的なハッキングの訓練とセキュリティ学習を目的として作成されています。
+これらのスクリプトを、所有権のない、または書面による明示的な許可を得ていないシステムに対して使用することは、厳しく禁止されています。
+利用者は、すべての活動において、現地の法律および規制を遵守する責任を負います。
