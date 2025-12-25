@@ -1,0 +1,54 @@
+Today's Learning Log
+✅ THM Advent of Cyber – Day 22
+
+C2 Detection – Command & Carol
+
+内容
+
+C2（Command & Control）通信の基本構造を理解
+
+不審な通信パターン（Beaconing / 定期通信）の識別
+
+ログ・トラフィックから「侵害後の挙動」を読み取る練習
+
+学び
+
+攻撃の本質は「侵入」ではなく「その後の通信」
+
+C2検知は Blue Team / SOC 視点での重要スキル
+
+✅ THM Advent of Cyber – Day 23
+
+AWS Security – S3cret Santa
+
+内容
+
+AWS S3 の misconfiguration を調査
+
+パブリック設定・権限管理ミスによる情報漏洩リスクを体験
+
+クラウド特有の攻撃・防御ポイントを理解
+
+学び
+
+クラウドは「設定ミス＝脆弱性」
+
+攻撃者視点で AWS を見る重要性
+
+✅ THM Advent of Cyber – Day 24
+
+Exploitation with cURL – Hoperation Eggsploit
+
+内容
+
+cURL を使った Web 攻撃の実践
+
+HTTP リクエストの構造理解（Headers / Parameters）
+
+GUIツールに頼らない攻撃・調査スキル
+
+学び
+
+cURL は攻撃・検証の基礎ツール
+
+自動化・スクリプト化に直結する知識
