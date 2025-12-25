@@ -1,0 +1,29 @@
+## Today's Progress
+
+### 🔐 TryHackMe
+**Advent of Cyber – Race Conditions: Toy to the World**
+
+- Race Condition の基本概念を理解
+- 処理の「順序」と「タイミング」によって発生する脆弱性を体験
+- 同時実行環境におけるチェックと処理の分離（TOCTOU問題）を確認
+- 「ロジック上は正しいが、現実では破綻する」コードの危険性を学習
+
+---
+
+### 🧪 Hack The Box
+**Starting Point Tier 2 – Vaccine**
+
+- Webアプリの検索機能に対する SQL Injection を確認
+- バックエンドDBが PostgreSQL であることを特定
+- PostgreSQL superuser 権限を利用し、`COPY FROM PROGRAM` による OS コマンド実行
+- Reverse shell を取得し、Web → DB → OS への横断を体験
+- 設定ファイルから認証情報を取得し、SSHログイン
+- `sudo` 設定ミス（vi 実行権限）を利用して権限昇格
+- root 権限を取得し、user.txt / root.txt を取得
+
+---
+
+### 🧠 Key Takeaways
+- SQLi は「情報取得」だけでなく「OS侵入」まで繋がる
+- DBの実行権限・設定ミスは致命的な攻撃面になる
+- Walkthroughで完走後に、攻撃チェーンを分解して理解することが重要

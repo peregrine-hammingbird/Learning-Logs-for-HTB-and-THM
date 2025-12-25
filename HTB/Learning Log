@@ -1,0 +1,43 @@
+# Security Learning Log
+
+## TryHackMe - Advent of Cyber
+
+### Room 17: CyberChef – Operation Save McSkidy
+**Focus:** Data decoding & transformation
+
+- Used CyberChef to analyze and decode provided artifacts
+- Applied multiple operations such as:
+  - Base64 decoding
+  - XOR / text manipulation
+- Learned how attackers may obfuscate data and how defenders can quickly analyze it using CyberChef
+
+**Key takeaway:**  
+CyberChef is a powerful tool for rapid analysis in DFIR and incident response scenarios.
+
+---
+
+### Room 18: Obfuscation – The Egg Shell File
+**Focus:** Obfuscation techniques
+
+- Analyzed an obfuscated file
+- Identified patterns used to hide malicious intent
+- Reconstructed the original content through step-by-step deobfuscation
+
+**Key takeaway:**  
+Understanding obfuscation is essential not only for malware analysis but also for recognizing suspicious scripts in real-world environments.
+
+---
+
+## Hack The Box - Starting Point Tier 2
+
+### Machine: Oopsie
+**Focus:** Web exploitation & Linux privilege escalation
+
+- Enumerated web application
+- Exploited file upload functionality to upload a PHP reverse shell
+- Gained initial access and obtained the **user flag**
+- Struggled with privilege escalation to root
+- Reviewed the walkthrough to understand the intended escalation path
+
+**Key takeaway:**  
+Initial access is only the beginning. Privilege escalation requires careful enumeration and understanding of system misconfigurations.

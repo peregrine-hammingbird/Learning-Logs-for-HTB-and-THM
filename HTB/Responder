@@ -1,0 +1,50 @@
+# HTB | Responder Writeup
+
+## Overview
+This machine focuses on abusing Windows name resolution mechanisms
+(LLMNR / NBT-NS) using Responder to capture NTLM authentication hashes.
+
+## Enumeration
+After connecting to the HTB VPN, an initial port scan revealed:
+
+- 80/tcp   HTTP
+- 5985/tcp WinRM
+
+The presence of port 5985 confirmed the target was a Windows machine
+with WinRM enabled.
+
+## Initial Access
+The target hostname was added to `/etc/hosts` to properly resolve the web service.
+
+During interaction with the web application, external resource resolution
+triggered Windows name resolution fallback behavior.
+This resulted in LLMNR/NBT-NS broadcast requests.
+
+## Credential Capture
+Responder was started in listening mode on the VPN interface.
+
+Due to the name resolution failure, the target system attempted NTLM
+authentication, allowing Responder to capture an NTLMv2 hash for the
+Administrator account.
+
+## Password Cracking
+The captured NTLMv2 hash was cracked using John the Ripper with a wordlist,
+successfully revealing the plaintext password.
+
+## Remote Access
+Since WinRM (5985/tcp) was open, Evil-WinRM was used to authenticate
+with the recovered credentials, resulting in an Administrator-level
+PowerShell session.
+
+## Flag Retrieval
+After gaining access, the filesystem was enumerated and the flag was
+found at:
+
+C:\Users\mike\Desktop\flag.txt
+
+The flag was successfully retrieved.
+
+## Key Takeaways
+- Responder exploits Windows name resolution behavior, not web vulnerabilities.
+- No direct exploit is required; misconfiguration is sufficient.
+- NTLM hashes can be leveraged for WinRM access when weak credentials are used.

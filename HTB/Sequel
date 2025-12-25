@@ -1,0 +1,26 @@
+Sequel（HTB Starting Point）まとめ
+1. ポート確認
+nmap -sC -sV MACHINE_IP
+3306/tcp → MySQL
+
+2. MySQL に root で接続
+通常の接続ではエラー（ERROR 2026）が出るため
+SSL を無効化して接続：
+mysql -h MACHINE_IP -u root --skip-ssl
+
+3. データベース調査
+SHOW DATABASES;
+USE htb;
+SHOW TABLES;
+config ← フラグがある
+users
+
+4. config テーブルを確認
+SELECT * FROM config;
+value カラムに フラグ（HTB{…}） が保存されていた。
+
+✔ 学んだこと（短く）
+MySQL で SSL が無効だとエラー（ERROR 2026）が出る
+--skip-ssl を付けると接続できる
+users に惑わされず、全テーブルを確認することが重要
+config にフラグが隠されていた

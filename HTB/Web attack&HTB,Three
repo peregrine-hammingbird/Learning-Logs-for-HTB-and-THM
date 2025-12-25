@@ -1,0 +1,43 @@
+# Lab Progress Log
+
+## 📅 Today’s Progress
+- TryHackMe: Advent of Cyber – Web Attack Forensics「Drone Alone」
+- Hack The Box: Starting Point – Tier 1「Three」
+
+---
+
+## 🔍 THM – Web Attack Forensics: Drone Alone
+
+### What I did
+- Webアクセスログをもとに攻撃の痕跡を分析
+- 不審なリクエストやパラメータを特定
+- 攻撃の流れ（侵入 → 悪用）を時系列で整理
+
+### Key Takeaways
+- Webフォレンジックでは  
+  **「何が起きたか」より「どう起きたか」を説明できることが重要**
+- ログは攻撃者視点・防御者視点の両方で読む必要がある
+- Web攻撃の理解はBlue Team視点にも直結する
+
+---
+
+## 💻 HTB – Starting Point Tier 1: Three
+
+### What I did
+- 対象ホストの列挙（Enumeration）
+- Webサービスの調査
+- S3バケットの設定ミスを利用した情報取得
+- フラグの取得
+
+### Key Takeaways
+- クラウド関連の設定ミスは依然として大きな攻撃面
+- 「Web + インフラ」の視点を同時に持つ重要性
+- 初期侵入は小さなミスから始まることが多い
+
+---
+
+## 🧠 Overall Learning
+- Red / Blue 両視点で考える習慣がついてきた
+- CTFを「解くだけ」で終わらせず、  
+  **攻撃の意図・防御側の気づき**まで意識するようになった
+

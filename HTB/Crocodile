@@ -1,0 +1,43 @@
+# Hack The Box - Starting Point Tier1 : Crocodile
+
+## Overview
+Crocodile is a Starting Point machine focused on **enumeration**, **credential discovery**, and **credential reuse** across services (FTP → Web).
+
+---
+
+## Enumeration
+### Nmap Scan
+nmap -sC -sV MACHINE_IP
+FTP (port 21) discovered
+Web service running on port 80
+
+FTP Enumeration
+Logged into the FTP service and downloaded available files.
+From FTP, obtained:
+Username list
+Password list
+These credentials were later reused against the web service.
+
+Web Enumeration
+Performed directory brute-forcing to identify authentication endpoints.
+
+gobuster dir -u http://MACHINE_IP -w /usr/share/wordlists/dirb/common.txt -x php
+Note: Gobuster initially timed out due to server instability.
+Restarting the machine resolved the issue.
+
+Discovered
+/login.php
+
+Exploitation
+Accessed the login page:http://MACHINE_IP/login.php
+
+Used credentials obtained from FTP:
+Username: admin
+Password: (from FTP password list)
+Successfully authenticated and retrieved the flag.
+
+Key Takeaways
+Importance of proper service enumeration
+Credential reuse between different services is a common real-world issue
+Handling tooling issues (timeouts) and identifying environment-related problems
+Methodical approach over brute force
